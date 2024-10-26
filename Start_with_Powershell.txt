@@ -1,0 +1,55 @@
+Start with Powershell:
+
+Kindly follow below steps when you startup and set windows powershell to manage Azure cloud environment. To achieve this you need to learn some poweshell commands also known as cmdlets.
+
+Download latest version of powershell:
+
+Either download ZIP package(extract and use)
+
+OR
+
+Download msi installer file(Need to install it after downloading)
+
+https://learn.microsoft.com/en-us/powershell/scripting/install/installing-powershell-on-windows?view=powershell-7.3#installing-the-msi-package
+
+1. Check Version of Powershell.
+
+$PSVersionTable.PSVersion
+
+2. To create and manage azure resources you need to install azure module. Check if Azure(Az) module is installed or not.
+
+Get-Module -Name Az -ListAvailable
+
+3. Set the PowerShell execution policy to remote signed or less restrictive. Check the PowerShell execution policy.
+
+Get-ExecutionPolicy -List
+
+4. Set the PowerShell execution policy to remote signed.
+
+Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
+
+To manage Azure cloud environment you need to install Az module in your windows powershell.
+
+5. Use the Install-Module cmdlet to install the Az PowerShell module.
+
+Install-Module -Name Az -Repository PSGallery -Force
+
+6. Use Update-Module to update to the latest version of the Az PowerShell module.
+
+Update-Module -Name Az -Force
+
+7. To start managing your Azure resources with the Az PowerShell module, launch a PowerShell session and run Connect-AzAccount to sign in to Azure. Use your Azure account login credentials to log into the browser window that opens. You'll need to repeat this step for every new PowerShell session you start.
+
+Connect-AzAccount
+
+8. After you logged in to your azure account using powershell, run some Az commands to check.
+
+Get-AzSubscription
+
+above command will display all the subscription in you current tenant/directory.
+
+9. If you have created some Resource Groups then you can run below Az command to check.
+
+Get-AzResourceGroup
+
+above command will display all the Resource Groups in you current subscription.
