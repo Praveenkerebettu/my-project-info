@@ -1,0 +1,24 @@
+# Variables
+$resourceGroupName = "az104-04-rg"
+$vnetName = "az104-04-vnet1"
+$subnetName = "subnet0"
+$subnetAddressPrefix = "10.40.0.0/24"
+
+# Login to Azure
+Connect-AzAccount
+
+# Select the subscription
+Select-AzSubscription -SubscriptionName $subscriptionName
+
+# Create resource group
+New-AzResourceGroup -Name $resourceGroupName -Location $location
+
+# Create virtual network
+$vnet = New-AzVirtualNetwork -ResourceGroupName $resourceGroupName -Name $vnetName -Location $location -AddressPrefix "10.40.0.0/20"
+
+# Add subnet to the virtual network
+Add-AzVirtualNetworkSubnetConfig -Name $subnetName -AddressPrefix $subnetAddressPrefix -VirtualNetwork $vnet
+
+# Apply changes to the virtual network
+$vnet | Set-AzVirtualNetwork
+
