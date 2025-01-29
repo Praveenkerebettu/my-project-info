@@ -1,0 +1,30 @@
+New-AzResourceGroup -Name "ResourceGroup1" -Location "EastUS"
+New-AzResourceGroup -Name "ResourceGroup2" -Location "EastUS"
+
+$vnet1 = New-AzVirtualNetwork -ResourceGroupName "ResourceGroup1" -Location "EastUS" -Name "VNet1" -AddressPrefix "10.0.0.0/16"
+$vnet2 = New-AzVirtualNetwork -ResourceGroupName "ResourceGroup2" -Location "EastUS" -Name "VNet2" -AddressPrefix "10.1.0.0/16"
+
+Get-AzVirtualNetwork
+
+$vnet1 = Set-AzVirtualNetwork -VirtualNetwork $vnet1
+$vnet2 = Set-AzVirtualNetwork -VirtualNetwork $vnet2
+
+Add-AzVirtualNetworkPeering -Name "LinkVNet1ToVNet2" -VirtualNetwork $vnet1 -RemoteVirtualNetworkId $vnet2.Id
+
+Add-AzVirtualNetworkPeering -Name "LinkVNet2ToVNet1" -VirtualNetwork $vnet2 -RemoteVirtualNetworkId $vnet1.Id
+
+$vm1 = New-AzVM -ResourceGroupName "ResourceGroup1" -Location "EastUS" -VirtualNetworkName "VNet1" -SubnetName "Subnet1" -Name "VM1" -Image "Ubuntu2204" -Credential (Get-Credential)
+$vm2 = New-AzVM -ResourceGroupName "ResourceGroup2" -Location "EastUS" -VirtualNetworkName "VNet2" -SubnetName "Subnet2" -Name "VM2" -Image "Ubuntu2204" -Credential (Get-Credential)
+
+
+FROM StorageSample SELECT average(diskFreeBytes)/1000/1000/1000 WHERE hostname LIKE '%' AND CustomerID IS NOT NULL AND mountPoint = '/' FACET URL, hostname TIMESERIES 1 MINUTE SINCE '2025-01-29 04:45:00 -05:00' UNTIL '2025-01-29 05:35:25 -05:00'
+
+
+
+
+
+
+
+
+
+
